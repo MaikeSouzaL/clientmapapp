@@ -1,0 +1,27 @@
+.circle {
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+  border-radius: 50%;
+}
+
+.label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background-color: white;
+  border: 2px solid rgba(247, 106, 63, 1);
+  padding: 2px 5px;
+  margin-top: 2px;
+  font-size: 12px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 10px;
+}
+.nameTitle{
+  color:rgba(247, 106, 63, 1); 
+  text-transform: uppercase;
+  font-size: 10px;
+}

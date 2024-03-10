@@ -1,0 +1,8 @@
+.titleempresa {
+  background-color: white;
+  border:  1px solid black;
+  border-radius: 5px;
+  position: relative;
+  right: -15px;
+  text-align: center;
+}
