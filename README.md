@@ -1,6 +1,6 @@
 ## Gerenciamento de Clientes
 
-Este repositório contém o código-fonte de uma aplicação web para gerenciamento de clientes . A aplicação é desenvolvida usando React.js para o frontend e Node.js para o backend.
+Este repositório contém o código-fonte de uma aplicação web para gerenciamento de clientes . A aplicação é desenvolvida usando React.js para o frontend e Node.js para o backend. Como também o banco de dados PostgreSQL.
 
 ## Como rodar localmente
 
