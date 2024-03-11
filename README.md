@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+Gerenciamento de Clientes
+Este repositório contém o código-fonte de uma aplicação web para gerenciamento de clientes . A aplicação é desenvolvida usando React.js para o frontend e Node.js para o backend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Como rodar localmente
+Pré-requisitos
+Antes de prosseguir, você precisará ter o Node.js e o PostgreSQL instalados em sua máquina.
 
-## Available Scripts
+Node.js: Download Node.js
+PostgreSQL: [Download PostgreSQL](https://nodejs.org/en)
+Passos para executar o backend:
+Clone o repositório do backend:
 
-In the project directory, you can run:
+Abra o cmd e insira o seguinte codigo
+git clone https://github.com/MaikeSouzaL/api_Residencias
+Navegue até o diretório onde foi salvo arquivo:
+Instale as dependências:
 
-### `npm start`
+yarn install
+Execute o servidor:
+yarn dev
+O servidor estará rodando em http://localhost:3080.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Passos para executar o frontend:
+Clone o repositório do frontend:
+git clone https://github.com/MaikeSouzaL/clientmapapp
+Navegue até o diretório do frontend:
+Instale as dependências:
+yarn install
+Execute o aplicativo React:
+yarn start
+O aplicativo estará rodando em http://localhost:3000.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Configurações do Banco de Dados
+Certifique-se de configurar corretamente as credenciais do banco de dados PostgreSQL no arquivo de configuração do backend.
+ 
 
-### `npm run build`
+javascript
+// Arquivo de configuração do banco de dados (backend/config/db.config.js)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const { Pool } = require('pg');
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const pool = new Pool({
+user: 'postgres',
+password: 'admin',
+host: 'localhost',
+database: 'facilita_juridico',
+port: 5433,
+});
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+module.exports = pool;
+DDL do Banco de Dados
+Aqui estão os scripts SQL para criar o banco de dados e as tabelas necessárias:
 
-### `npm run eject`
+Se tiver o postgres intalado em sua máquina abra-o va  ele vai te pedir para cria um user e senha 
+no nosso cado criamos como senha admin
+Ao abrir crie uma nova database e de o nome de facilita_juridico
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-- Criar o banco de dados
+CREATE DATABASE facilita_juridico;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-- Usar o banco de dados facilita_juridico
+\c facilita_juridico;
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-- Criar a tabela 'clientes'
+CREATE TABLE clientes (
+id SERIAL PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+telefone VARCHAR(20) NOT NULL,
+servico_realizado BOOLEAN NOT NULL DEFAULT false
+);
 
-## Learn More
+-- Criar a tabela 'coordenadas'
+CREATE TABLE coordenadas (
+id SERIAL PRIMARY KEY,
+client_id INTEGER REFERENCES clientes(id),
+coordenada_x DOUBLE PRECISION NOT NULL,
+coordenada_y DOUBLE PRECISION NOT NULL
+);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contribuindo
+Contribuições são bem-vindas! Se você quiser contribuir com este projeto, por favor abra uma issue para discutir a alteração que você gostaria de fazer.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Licença
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
