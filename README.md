@@ -9,7 +9,8 @@ Este repositório contém o código-fonte de uma aplicação web para gerenciame
 
 - Node.js: [Download Node.js](https://nodejs.org/en)
 - PostgreSQL: [Download PostgreSQL](hhttps://www.postgresql.org/download/windows/)
-Passos para executar o backend:
+
+## Passos para executar o backend:
 Clone o repositório do backend:
 
 2.Abra o cmd e insira o seguinte codigo
@@ -93,7 +94,7 @@ servico_realizado BOOLEAN NOT NULL DEFAULT false
 ```bash
 CREATE TABLE coordenadas (
 id SERIAL PRIMARY KEY,
-client_id INTEGER REFERENCES clientes(id),
+cliente_id INTEGER REFERENCES clientes(id),
 coordenada_x DOUBLE PRECISION NOT NULL,
 coordenada_y DOUBLE PRECISION NOT NULL
 );
