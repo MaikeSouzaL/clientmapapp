@@ -86,3 +86,4 @@ Contribuições são bem-vindas! Se você quiser contribuir com este projeto, po
 
 Licença
 Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
+ 
