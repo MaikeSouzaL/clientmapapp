@@ -167,10 +167,13 @@ const App = () => {
       setError(error.message);
     }
   };
-
+if(error){
+  alert(error)
+}
   const empresa = { nome: "Clear House", x: 300, y: 300 };
 
   return (
+    
     <div className="container">
       <div className="contain-rota">
         <MapaClientes clientes={clientes} empresa={empresa} />
