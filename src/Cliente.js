@@ -1,7 +1,8 @@
 import React from "react";
 import "./Cliente.css";
 
-function Cliente({ nome, x, y }) {
+function Cliente({ nome, x, y, servicoRealizado}) {
+ 
   return (
     <div
       style={{

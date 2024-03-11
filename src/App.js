@@ -30,6 +30,7 @@ const App = () => {
       const response = await axios.get("http://172.19.0.1:3080/client");
       const data = response.data;
       const clientesFormatados = data.map((item) => ({
+        servico_realizado: item.servico_realizado,
         id: item.id,
         nome: item.nome,
         x: item.coordenada_x,
@@ -88,7 +89,6 @@ const App = () => {
     try {
       const response = await axios.get(`http://172.19.0.1:3080/client/show`);
       const data = response.data;
-      console.log(data);
       const clientesFormatados = data.map((item) => ({
         cliente_id: item.cliente_id,
         id: item.id,
@@ -143,24 +143,26 @@ const App = () => {
   const handleListRoutes = () => {
     setShowRoutesModal(true);
   };
-  const handleEditServicoRealizado = async (cliente) => {
+
+  const handleToggleServicoRealizado = async (cliente) => {
+    console.log(cliente.cliente_id);
     try {
-      // Faz uma solicitação PUT para o backend para atualizar o serviço realizado
+      const updatedCliente = {
+        ...cliente,
+        servico_realizado: !cliente.servico_realizado,
+      };
+
       await axios.put(
-        `http://172.19.0.1:3080/client/update/${cliente.cliente_id}`,
-        { servico_realizado: true }
+        `http://172.19.0.1:3080/client/update-servico/${cliente.cliente_id}`,
+        { servico_realizado: updatedCliente.servico_realizado }
       );
 
-      // Atualiza a lista de clientes para refletir a alteração
       const updatedClientes = clientes.map((c) =>
-        c.cliente_id === cliente.cliente_id
-          ? { ...c, servico_realizado: true }
-          : c
+        c.cliente_id === cliente.cliente_id ? updatedCliente : c
       );
       setClientes(updatedClientes);
 
-      // Mostra uma mensagem de sucesso (opcional)
-      alert("Serviço realizado alterado com sucesso!");
+      alert("Status do serviço atualizado com sucesso!");
     } catch (error) {
       setError(error.message);
     }
@@ -228,6 +230,7 @@ const App = () => {
           </button>
         </form>
       </div>
+
       {/**modal */}
 
       {showModal && (
@@ -293,15 +296,19 @@ const App = () => {
                 }
               />
             </p>
-            <button onClick={handleSaveChanges}>Salvar Alterações</button>
-            <button onClick={handleDeleteCliente}>Excluir Cliente</button>
+            <button className=" btn-save" onClick={handleSaveChanges}>
+              Salvar Alterações
+            </button>
+            <button style={{ background: "red" }} onClick={handleDeleteCliente}>
+              Excluir Cliente
+            </button>
           </div>
         </div>
       )}
 
-      {showRoutesModal && ( // Renderização condicional do modal de rotas
+      {showRoutesModal && (
         <div className="modal1">
-          <div className="modal-content">
+          <div className="modal-content ">
             <span className="close" onClick={() => setShowRoutesModal(false)}>
               &times;
             </span>
@@ -309,22 +316,48 @@ const App = () => {
             <div className="title">
               <h3>Nome e Coordenadas</h3>
             </div>
+
             <ul>
-              {clientes.map((cliente, index) => (
-                <li key={index}>
-                  <span className="client-name">{cliente.cliente_id}</span> -{" "}
-                  <span className="client-name">{cliente.nome}</span> -{" "}
-                  <span className="client-coordinates">
-                    {cliente.x}, {cliente.y}
-                  </span>
-                  <button
-                    onClick={() => handleEditServicoRealizado(cliente)}
-                    className="edit-button"
-                  >
-                    Alterar Serviço Realizado
-                  </button>
-                </li>
-              ))}
+              <div>
+                {clientes.map((cliente, index) => (
+                  <li key={index}>
+                    <div id="modal3">
+                      <div>
+                        <span className="client-name">{cliente.nome}</span> -{" "}
+                        <span className="client-coordinates">
+                          {cliente.x}, {cliente.y}
+                        </span>
+                      </div>
+                      <div>
+                        <input
+                          className="routes-btn"
+                          type="checkbox"
+                          checked={cliente.servico_realizado}
+                          onChange={() => handleToggleServicoRealizado(cliente)}
+                          style={{
+                            cursor: "pointer",
+                            backgroundColor: cliente.servico_realizado
+                              ? "green"
+                              : "red",
+                            color: "white",
+                            fontWeight: "bold",
+                          }}
+                        />
+                        <span
+                          style={{
+                            marginLeft: "10px",
+                            color: cliente.servico_realizado ? "green" : "red",
+                          }}
+                        >
+                          {cliente.servico_realizado
+                            ? "Finalizado"
+                            : "Aguardando"}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </div>
             </ul>
           </div>
         </div>

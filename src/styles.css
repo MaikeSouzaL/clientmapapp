@@ -181,6 +181,9 @@ form {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.btn-save{
+  margin-right: 20px;
+}
 .modal1-content button {
   background-color: #4caf50;
   color: white;
@@ -191,4 +194,9 @@ form {
 }
 .modal1-content button:hover {
   background-color: #45a049;
+}
+/*modal Rotas*/
+#modal3 {
+  display: flex;
+  justify-content: space-between;
 }
