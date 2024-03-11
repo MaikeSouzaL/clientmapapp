@@ -8,7 +8,7 @@ Este repositório contém o código-fonte de uma aplicação web para gerenciame
  1.  Antes de prosseguir, você precisará ter o Node.js e o PostgreSQL instalados em sua máquina.
 
 - Node.js: [Download Node.js](https://nodejs.org/en)
-- PostgreSQL: [Download PostgreSQL](hhttps://www.postgresql.org/download/windows/)
+- PostgreSQL: [Download PostgreSQL](https://www.postgresql.org/)
 
 ## Passos para executar o backend:
 Clone o repositório do backend:
